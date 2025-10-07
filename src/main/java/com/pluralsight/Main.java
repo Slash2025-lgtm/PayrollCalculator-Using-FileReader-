@@ -14,30 +14,7 @@ public class Main {
                 int Chosen = keyboard.nextInt();
                 keyboard.nextLine();
                 if (Chosen == 1) {
-                    FileReader fileReader = new FileReader("src/main/resources/employees.csv");
-                    BufferedReader bufReader = new BufferedReader(fileReader);
-
-                    String input;
-                    while ((input = bufReader.readLine()) != null) {
-                        String[] employeeList = input.split("[|]");
-
-                        if (!employeeList[0].equalsIgnoreCase("id")) {
-                            employee.setEmployeeId(Integer.parseInt(employeeList[0]));
-                            employee.setName(employeeList[1]);
-                            employee.setHoursWorked(Double.parseDouble(employeeList[2]));
-                            employee.setPayRate(Double.parseDouble(employeeList[3]));
-
-                            String name = employee.getName();
-                            int employeeID = employee.getEmployeeId();
-                            double workHours = employee.getHoursWorked();
-                            double payRate = employee.getPayRate();
-                            double grossPay = employee.getGrossPay();
-
-                            System.out.printf("ID: %d\nName: %s\nGross Pay: $%.2f\n",employeeID, name ,grossPay);
-                            System.out.println("\n");
-                        }
-                    }
-                    bufReader.close();
+                    showCurrentPayroll(employee);
                 } else if (Chosen == 2) {
                     System.out.print("Enter the name of the file: ");
                     String fileName = keyboard.next().trim();
@@ -65,38 +42,7 @@ public class Main {
                         bufWriter.close();
                     }
                 } else if (Chosen == 3) {
-                    System.out.println("Enter the name of the file employee file to process: ");
-                    String fileName = keyboard.nextLine();
-
-                    FileReader fileReader = new FileReader("src/main/resources/" + fileName);
-                    BufferedReader bufReader = new BufferedReader(fileReader);
-
-                    System.out.println("Enter the name of the payroll file to create: ");
-                    String newfileName = keyboard.nextLine();
-                    FileWriter fileWriter = new FileWriter("src/main/resources/" + newfileName);
-                    BufferedWriter bufWriter = new BufferedWriter(fileWriter);
-
-                    String input;
-
-                    while ((input = bufReader.readLine()) != null) {
-                        String[] employeeList = input.split("[|]");
-
-                        if (!employeeList[0].equalsIgnoreCase("id")) {
-                            employee.setEmployeeId(Integer.parseInt(employeeList[0]));
-                            employee.setName(employeeList[1]);
-                            employee.setHoursWorked(Double.parseDouble(employeeList[2]));
-                            employee.setPayRate(Double.parseDouble(employeeList[3]));
-
-                            String name = employee.getName();
-                            int employeeID = employee.getEmployeeId();
-                            double workHours = employee.getHoursWorked();
-                            double payRate = employee.getPayRate();
-                            double grossPay = employee.getGrossPay();
-
-                            bufWriter.write(employeeID + "|" + name + "|$" + grossPay + "\n");
-                        }
-                    }
-                    bufWriter.close();
+                    transfer(employee, keyboard);
                 } else {
                     Opened = false;
                 }
@@ -111,6 +57,89 @@ public class Main {
                 } else if (Selected == 2) {
                     System.out.println("Ending Program");
                 }
+            }
+        }
+    }
+    public static void showCurrentPayroll(Employee employee) {
+        try {
+            FileReader fileReader = new FileReader("src/main/resources/employees.csv");
+            BufferedReader bufReader = new BufferedReader(fileReader);
+
+            String input;
+            while ((input = bufReader.readLine()) != null) {
+                String[] employeeList = input.split("[|]");
+
+                if (!employeeList[0].equalsIgnoreCase("id")) {
+                    employee.setEmployeeId(Integer.parseInt(employeeList[0]));
+                    employee.setName(employeeList[1]);
+                    employee.setHoursWorked(Double.parseDouble(employeeList[2]));
+                    employee.setPayRate(Double.parseDouble(employeeList[3]));
+
+                    String name = employee.getName();
+                    int employeeID = employee.getEmployeeId();
+                    double workHours = employee.getHoursWorked();
+                    double payRate = employee.getPayRate();
+                    double grossPay = employee.getGrossPay();
+
+                    System.out.printf("ID: %d\nName: %s\nGross Pay: $%.2f\n",employeeID, name ,grossPay);
+                    System.out.println("\n");
+                }
+            }
+            bufReader.close();
+        } catch (IOException e) {
+            System.out.println("I/O Error \n[1] See Error\n[2] Exit\nEnter Number: ");
+            Scanner keyboard = new Scanner(System.in);
+            int Selected = keyboard.nextInt();
+
+            if (Selected == 1) {
+                e.printStackTrace();
+            } else if (Selected == 2) {
+                System.out.println("Ending Program");
+            }
+        }
+    }
+    public static void transfer(Employee employee, Scanner keyboard) {
+        try {
+            System.out.println("Enter the name of the file employee file to process: ");
+            String fileName = keyboard.nextLine();
+
+            FileReader fileReader = new FileReader("src/main/resources/" + fileName);
+            BufferedReader bufReader = new BufferedReader(fileReader);
+
+            System.out.println("Enter the name of the payroll file to create: ");
+            String newfileName = keyboard.nextLine();
+            FileWriter fileWriter = new FileWriter("src/main/resources/" + newfileName);
+            BufferedWriter bufWriter = new BufferedWriter(fileWriter);
+
+            String input;
+
+            while ((input = bufReader.readLine()) != null) {
+                String[] employeeList = input.split("[|]");
+
+                if (!employeeList[0].equalsIgnoreCase("id")) {
+                    employee.setEmployeeId(Integer.parseInt(employeeList[0]));
+                    employee.setName(employeeList[1]);
+                    employee.setHoursWorked(Double.parseDouble(employeeList[2]));
+                    employee.setPayRate(Double.parseDouble(employeeList[3]));
+
+                    String name = employee.getName();
+                    int employeeID = employee.getEmployeeId();
+                    double workHours = employee.getHoursWorked();
+                    double payRate = employee.getPayRate();
+                    double grossPay = employee.getGrossPay();
+
+                    bufWriter.write(employeeID + "|" + name + "|$" + grossPay + "\n");
+                }
+            }
+            bufWriter.close();
+        } catch (IOException e) {
+            System.out.println("I/O Error \n[1] See Error\n[2] Exit\nEnter Number: ");
+            int Selected = keyboard.nextInt();
+
+            if (Selected == 1) {
+                e.printStackTrace();
+            } else if (Selected == 2) {
+                System.out.println("Ending Program");
             }
         }
     }
