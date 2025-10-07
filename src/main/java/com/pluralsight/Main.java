@@ -16,38 +16,14 @@ public class Main {
                 if (Chosen == 1) {
                     showCurrentPayroll(employee);
                 } else if (Chosen == 2) {
-                    System.out.print("Enter the name of the file: ");
-                    String fileName = keyboard.next().trim();
-                    keyboard.nextLine();
-                    if (fileName.equalsIgnoreCase("employees.csv")) {
-                        System.out.println("=== Edit Mode ===");
-
-                        FileWriter fileWriter = new FileWriter("src/main/resources/employees.csv", true);
-                        BufferedWriter bufWriter = new BufferedWriter(fileWriter);
-
-                        System.out.println("Enter in the Employee's ID: ");
-                        String id = keyboard.nextLine();
-
-                        System.out.println("Enter in the Employee's Name: ");
-                        String name = keyboard.nextLine();
-
-                        System.out.println("Enter in the Employee's Hourly pay: ");
-                        String payRate = keyboard.nextLine();
-
-                        System.out.println("Enter in the Employee's Worked Hours: ");
-                        String workedHours = keyboard.nextLine();
-
-                        System.out.println(name + " Has been added to the payroll Calculator.");
-                        bufWriter.write("\n" + id + "|" + name + "|" + payRate + "|" + workedHours);
-                        bufWriter.close();
-                    }
+                    edit(employee, keyboard);
                 } else if (Chosen == 3) {
                     transfer(employee, keyboard);
                 } else {
                     Opened = false;
                 }
 
-            } catch (IOException e) {
+            } catch (Exception e) {
                 System.out.println("I/O Error \n[1] See Error\n[2] Exit\nEnter Number: ");
                 Scanner keyboard = new Scanner(System.in);
                 int Selected = keyboard.nextInt();
@@ -89,6 +65,45 @@ public class Main {
         } catch (IOException e) {
             System.out.println("I/O Error \n[1] See Error\n[2] Exit\nEnter Number: ");
             Scanner keyboard = new Scanner(System.in);
+            int Selected = keyboard.nextInt();
+
+            if (Selected == 1) {
+                e.printStackTrace();
+            } else if (Selected == 2) {
+                System.out.println("Ending Program");
+            }
+        }
+    }
+
+    public static void edit(Employee employee, Scanner keyboard) {
+        try {
+            System.out.print("Enter the name of the file: ");
+            String fileName = keyboard.next().trim();
+            keyboard.nextLine();
+            if (fileName.equalsIgnoreCase("employees.csv")) {
+                System.out.println("=== Edit Mode ===");
+
+                FileWriter fileWriter = new FileWriter("src/main/resources/employees.csv", true);
+                BufferedWriter bufWriter = new BufferedWriter(fileWriter);
+
+                System.out.println("Enter in the Employee's ID: ");
+                String id = keyboard.nextLine();
+
+                System.out.println("Enter in the Employee's Name: ");
+                String name = keyboard.nextLine();
+
+                System.out.println("Enter in the Employee's Hourly pay: ");
+                String payRate = keyboard.nextLine();
+
+                System.out.println("Enter in the Employee's Worked Hours: ");
+                String workedHours = keyboard.nextLine();
+
+                System.out.println(name + " Has been added to the payroll Calculator.");
+                bufWriter.write("\n" + id + "|" + name + "|" + payRate + "|" + workedHours);
+                bufWriter.close();
+            }
+        } catch (IOException e) {
+            System.out.println("I/O Error \n[1] See Error\n[2] Exit\nEnter Number: ");
             int Selected = keyboard.nextInt();
 
             if (Selected == 1) {
