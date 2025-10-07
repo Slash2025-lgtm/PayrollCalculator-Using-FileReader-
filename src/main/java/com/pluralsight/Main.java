@@ -40,7 +40,7 @@ public class Normal {
                 }
 
             }
-
+            bufReader.close();
         } catch (IOException e) {
             Scanner keyboard = new Scanner(System.in);
             System.out.println("I/O Error \n[1] See Error\n[2] Exit\nEnter Number: ");
@@ -52,7 +52,5 @@ public class Normal {
                 System.out.println("Ending Program");
             }
         }
-
-
     }
 }
