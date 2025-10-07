@@ -152,7 +152,7 @@ public class Main {
 
                     if (fileType[1].equalsIgnoreCase("csv")) {
                        format = employeeID + "|" + name + "|$" + grossPay + "\n";
-                    } else {
+                    } else if (fileType[1].equalsIgnoreCase("json")) {
                         format = "{ id: " + employeeID + " Name :" + name + "grossPay :" + grossPay + "},\n";
                     }
                     bufWriter.write(format);
