@@ -26,11 +26,11 @@ public class Main {
             } catch (Exception e) {
                 System.out.println("I/O Error \n[1] See Error\n[2] Exit\nEnter Number: ");
                 Scanner keyboard = new Scanner(System.in);
-                int Selected = keyboard.nextInt();
+                int selected = keyboard.nextInt();
 
-                if (Selected == 1) {
+                if (selected == 1) {
                     e.printStackTrace();
-                } else if (Selected == 2) {
+                } else if (selected == 2) {
                     System.out.println("Ending Program");
                 }
             }
