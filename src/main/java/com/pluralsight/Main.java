@@ -10,7 +10,7 @@ public class Main {
             try {
                 Employee employee = new Employee();
                 Scanner keyboard = new Scanner(System.in);
-                System.out.println("Would you like to:\n[1] Show Current Payroll \n[2] Edit A file\n[3] Transfer\n[ANY Other Number Key] Exit");
+                System.out.print("Would you like to:\n[1] Show Current Payroll \n[2] Edit A file\n[3] Transfer\n[ANY Other Number Key] Exit\nEnter in a Number: ");
                 int chosen = keyboard.nextInt();
                 keyboard.nextLine();
                 if (chosen == 1) {
@@ -57,7 +57,8 @@ public class Main {
                     double payRate = employee.getPayRate();
                     double grossPay = employee.getGrossPay();
 
-                    System.out.printf("ID: %d\nName: %s\nGross Pay: $%.2f\n",employeeID, name ,grossPay);
+                    System.out.printf("ID: %d\nName: %s\nGross Pay: $%.2f",employeeID, name ,grossPay);
+                    System.out.println("\n");
                 }
             }
             bufReader.close();
@@ -114,14 +115,17 @@ public class Main {
     }
     public static void transfer(Employee employee, Scanner keyboard) {
         try {
-            System.out.println("Enter the name of the file employee file to process: ");
-            String fileName = keyboard.nextLine();
+            System.out.print("Enter the name of the file employee file to process: ");
+            String fileName = keyboard.next();
+            keyboard.nextLine();
 
             FileReader fileReader = new FileReader("src/main/resources/" + fileName);
             BufferedReader bufReader = new BufferedReader(fileReader);
 
-            System.out.println("Enter the name of the payroll file to create: ");
-            String newfileName = keyboard.nextLine();
+            System.out.print("Enter the name of the payroll file to create: ");
+            String newfileName = keyboard.next();
+            keyboard.nextLine();
+
             FileWriter fileWriter = new FileWriter("src/main/resources/" + newfileName);
             BufferedWriter bufWriter = new BufferedWriter(fileWriter);
 
@@ -145,6 +149,7 @@ public class Main {
                     bufWriter.write(employeeID + "|" + name + "|$" + grossPay + "\n");
                 }
             }
+            System.out.println("\n");
             bufWriter.close();
         } catch (IOException e) {
             System.out.println("I/O Error \n[1] See Error\n[2] Exit\nEnter Number: ");
