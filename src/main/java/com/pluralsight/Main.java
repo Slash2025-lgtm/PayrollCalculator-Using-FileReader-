@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Normal {
+public class Main {
     public static void main(String[] args) {
         try {
             FileReader fileReader = new FileReader("src/main/resources/employees.csv");
@@ -13,17 +13,17 @@ public class Normal {
 
             String input;
             String[] labelList = new String[5];
-            boolean Labels = false;
+            boolean labels = false;
             while ((input = bufReader.readLine()) != null) {
                 String[] employeeList = input.split("[|]");
                 Employee employee = new Employee();
-                if (!Labels) {
+                if (!labels) {
                     int i = 0;
                     while (i < employeeList.length) {
                         labelList[i] = employeeList[i];
                         i++;
                     }
-                    Labels = true;
+                    labels = true;
                 } else {
                     int i = 0;
                     while (i < employeeList.length) {
