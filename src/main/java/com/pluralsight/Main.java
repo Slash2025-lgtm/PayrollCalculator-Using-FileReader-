@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Main {
+public class Normal {
     public static void main(String[] args) {
         try {
             FileReader fileReader = new FileReader("src/main/resources/employees.csv");
@@ -16,7 +16,7 @@ public class Main {
             boolean Labels = false;
             while ((input = bufReader.readLine()) != null) {
                 String[] employeeList = input.split("[|]");
-
+                Employee employee = new Employee();
                 if (!Labels) {
                     int i = 0;
                     while (i < employeeList.length) {
@@ -29,10 +29,13 @@ public class Main {
                     while (i < employeeList.length) {
                         System.out.println(labelList[i] + ": " + employeeList[i]);
                         i++;
+                        employee.setHoursWorked(Double.parseDouble(employeeList[2]));
+                        employee.setPayRate(Double.parseDouble(employeeList[3]));
                     }
-                    double hours = Double.parseDouble(employeeList[2]);
-                    double payRate = Double.parseDouble(employeeList[3]);
-                    System.out.printf("gross-pay: $%.2f\n", (payRate * hours));
+
+                    double grossPay = employee.getGrossPay();
+
+                    System.out.printf("gross-pay: $%.2f\n", grossPay);
                     System.out.println("\n");
                 }
 
