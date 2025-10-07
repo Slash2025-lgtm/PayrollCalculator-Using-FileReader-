@@ -5,22 +5,22 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        boolean Opened = true;
-        while (Opened) {
+        boolean opened = true;
+        while (opened) {
             try {
                 Employee employee = new Employee();
                 Scanner keyboard = new Scanner(System.in);
                 System.out.println("Would you like to:\n[1] Show Current Payroll \n[2] Edit A file\n[3] Transfer\n[ANY Other Number Key] Exit");
-                int Chosen = keyboard.nextInt();
+                int chosen = keyboard.nextInt();
                 keyboard.nextLine();
-                if (Chosen == 1) {
+                if (chosen == 1) {
                     showCurrentPayroll(employee);
-                } else if (Chosen == 2) {
+                } else if (chosen == 2) {
                     edit(employee, keyboard);
-                } else if (Chosen == 3) {
+                } else if (chosen == 3) {
                     transfer(employee, keyboard);
                 } else {
-                    Opened = false;
+                    opened = false;
                 }
 
             } catch (Exception e) {
@@ -65,11 +65,11 @@ public class Main {
         } catch (IOException e) {
             System.out.println("I/O Error \n[1] See Error\n[2] Exit\nEnter Number: ");
             Scanner keyboard = new Scanner(System.in);
-            int Selected = keyboard.nextInt();
+            int selected = keyboard.nextInt();
 
-            if (Selected == 1) {
+            if (selected == 1) {
                 e.printStackTrace();
-            } else if (Selected == 2) {
+            } else if (selected == 2) {
                 System.out.println("Ending Program");
             }
         }
@@ -104,11 +104,11 @@ public class Main {
             }
         } catch (IOException e) {
             System.out.println("I/O Error \n[1] See Error\n[2] Exit\nEnter Number: ");
-            int Selected = keyboard.nextInt();
+            int selected = keyboard.nextInt();
 
-            if (Selected == 1) {
+            if (selected == 1) {
                 e.printStackTrace();
-            } else if (Selected == 2) {
+            } else if (selected == 2) {
                 System.out.println("Ending Program");
             }
         }
@@ -149,11 +149,11 @@ public class Main {
             bufWriter.close();
         } catch (IOException e) {
             System.out.println("I/O Error \n[1] See Error\n[2] Exit\nEnter Number: ");
-            int Selected = keyboard.nextInt();
+            int selected = keyboard.nextInt();
 
-            if (Selected == 1) {
+            if (selected == 1) {
                 e.printStackTrace();
-            } else if (Selected == 2) {
+            } else if (selected == 2) {
                 System.out.println("Ending Program");
             }
         }
