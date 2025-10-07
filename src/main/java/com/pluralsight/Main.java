@@ -146,7 +146,16 @@ public class Main {
                     double payRate = employee.getPayRate();
                     double grossPay = employee.getGrossPay();
 
-                    bufWriter.write(employeeID + "|" + name + "|$" + grossPay + "\n");
+                    String[] fileType = newfileName.split("[.]");
+
+                    String format = "";
+
+                    if (fileType[1].equalsIgnoreCase("csv")) {
+                       format = employeeID + "|" + name + "|$" + grossPay + "\n";
+                    } else {
+                        format = "{ id: " + employeeID + " Name :" + name + "grossPay :" + grossPay + "},\n";
+                    }
+                    bufWriter.write(format);
                 }
             }
             System.out.println("\n");
