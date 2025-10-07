@@ -58,7 +58,6 @@ public class Main {
                     double grossPay = employee.getGrossPay();
 
                     System.out.printf("ID: %d\nName: %s\nGross Pay: $%.2f\n",employeeID, name ,grossPay);
-                    System.out.println("\n");
                 }
             }
             bufReader.close();
